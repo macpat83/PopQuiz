@@ -1,4 +1,8 @@
 var timerEl = document.getElementById('countdown');
+var start_bttn = document.querySelector(".start-btn button");
+var container = document.querySelector("container");
+const question_text = document.querySelector(".question_text");
+const selection_text = document.querySelector(".selection_text");
 
 function countdown() {
     var timeLeft = 60;
@@ -85,21 +89,11 @@ function countdown() {
 
 // function to run quiz
 function runQuiz(){
-    //variable to store the output
-    var output= [];
-     questions.forEach(
-         (currentQuestion, questionNumber) => {
-            //var to store answers
-            var answers = [];
-            
-            //each available answer
-            for(letter in currentQuestion.answers)
-         }
-     )
 }
 
     
 
 countdown();
+
 
 
