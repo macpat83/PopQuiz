@@ -1,86 +1,15 @@
-let questions = [{
-    number: 1,
-    question:"",
-    answer: "",
-    selections: [
-        // a
-        // b
-        // c
-        // d
-    ]
-    
-},
+const QUIZ_BOXES = document.querySelectorAll('.quiz-box');
 
-{
-number: 2,
-    question:"",
-    answer:"",
-    selections: [
-        // a
-        // b
-        // c
-        // d
-
-    ]
-    
-},
-
-{
-    number: 3,
-        question:"",
-        answer:"",
-        selections: [
-            // a
-            // b
-            // c
-            // d
-
-        ]
-    
-    },
-
-    {
-        number: 4,
-            question:"",
-            answer:"",
-            selections: [
-                // a
-                // b
-                // c
-                // d
-    
-            ]
-        },
-
-        {
-number: 5,
-    question:"",
-    answer:"",
-    selections: [
-        // a
-        // b
-        // c
-        // d
-
-    ]
-}
-
-];
-
-
-
-var QUIZ_BOXES = document.querySelectorAll(".quiz-box");
-
-var START_SECTION = document.getElementById("start");
-var START_BTTN = document.getElementById("start-bttn")
+const START_SECTION = document.getElementById("start");
+const START_BTTN = document.getElementById("start_bttn");
 
 var QUIZ_BOX = document.getElementById("quiz-questions");
 var TIME_LEFT = document.getElementById("time-left");
 var QUESTION = document.getElementById("question");
 var SELECTIONS = document.getElementById("selections");
 var SELECTIONS_STATUS = document.querySelectorAll(".selection-status")
-var RIGHT = document.getElementById("correct");
-var WRONG = document.getElementById("incorrect");
+// var RIGHT = document.getElementById("correct");
+// var WRONG = document.getElementById("incorrect");
 
 var RESULTS_SECTION = document.getElementById("results");
 var RESULTS_TITLE = document.getElementById("results-title");
@@ -116,17 +45,31 @@ var maxTime = 60;
 var maxTimeInterval;
 var selectionOptionExpire;
 
-/*Event Listeners */
-START_BTTN.addEventListener('click', beginGame);
-SELECTIONS.addEventListener('click', assessSelection);
-ENTER_SCORE.addEventListener('submit', inputScore);
+    /*Event Listeners */
+    START_BTTN.addEventListener('click', beginGame);
+    SELECTIONS.addEventListener('click', assessSelection);
+    ENTER_SCORE.addEventListener('submit', inputScore);
+
 
 function beginGame() {
-    showElement(QUIZ_BOX, QUIZ_BOXES);
+    showElement(QUIZ_BOXES, QUIZ_BOX);
     countDown();
     showQuestions();
     beginCountdown();
 }
+
+function showElement(siblingList, showElement) {
+    for (element of siblingList) {
+      hideElement(element);
+    }
+    showElement.classList.remove("hidden");
+  } 
+  
+  function hideElement(element) {
+    if (!element.classList.contains("hidden")) {
+      element.classList.add("hidden");
+    }
+  }
 
 function countDown() {
     TIME_LEFT.textContent = maxTime;
@@ -148,7 +91,7 @@ function endTime() {
 }
 
 function showQuestions() {
-    Question.textContent = QUESTION_OPTIONS[currentQuestion].question;
+    Question.textContent = QUESTION_OPTIONS[startQuestion].question;
 
     showSelectionList();
 }
@@ -156,7 +99,7 @@ function showQuestions() {
 function showSelectionList() {
     SELECTIONS.innerHTML = "";
 
-    QUESTION_OPTIONS[currentQuestion].selections.forEach(function(answer, index) {
+    QUESTION_OPTIONS[startQuestion].selections.forEach(function(answer, index) {
         var li = document.createElement("li");
         li.dataset.index = index;
         var button = document.createElement("button");
@@ -175,5 +118,95 @@ function assessSelection(event) {
 }
 
 function verifySelection(userSelection) {
-    if ()
+    if (correctAnswer(userSelection)) {
+        showCorrectAnswer();
+    } else {
+        showWrongAnswer();
+    }
 }
+
+function correctAnswer(selection) {
+    return selection === QUESTION_OPTIONS[startQuestion].indexOfCorrectSelections;
+}
+
+function showCorrectAnswer() {
+    showElement(SELECTIONS_STATUS);
+}
+
+function showWrongAnswer() {
+    timePenalty(10);
+
+
+}
+
+function timePenalty(seconds) {
+    maxTime -= seconds;
+    endTime();
+    countDown();
+}
+
+function goToNextQuestion() {
+    startQuestion++;
+    if (startQuestion >= QUESTION_OPTIONS.length) {
+        finishGame();
+    }else {
+        showQuestions();
+    }
+    
+}
+
+function finishGame() {
+    clearInterval(maxTimeInterval);
+    showElement(QUIZ_BOXES, RESULTS_SECTION)
+    showScore();
+    scoreResult();
+
+}
+
+function showScore() {
+    SCORE.textContent = maxTime;
+}
+
+function scoreResult() {
+    if (maxTime === 0) {
+        RESULTS_TITLE = "You ran out of time!";
+    } else {
+        RESULTS_TITLE.textContent = "Yay, you were able to complete the quiz in time!";
+    }
+}
+
+function inputScore(event) {
+    
+    var initials = INITIALS_ENTERED.ariaValueMax.toUpperCase();
+
+    if (initials) {
+        var score = maxTime;
+        var highscore = newHighScore(initials, score);
+        saveHighScore(highscore);
+    }
+}
+
+function newHighScore(initials, score) {
+    var input = {
+        initials: initials,
+        score: score,
+    }
+    return input;
+    }
+
+
+    function saveHighScore(highscore) {
+        var scores = leaderBoard();
+        addHighScore(highscore, scores);
+        localStorage.setItem('LeaderBoard', JSON.stringify(scores));
+        
+    }
+
+    function leaderBoard() {
+        var scores = localStorage.getItem('LeaderBoard')
+        if (scores) {
+            return JSON.parse(scores);
+        }else {
+            return [];
+        }
+    }

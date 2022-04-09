@@ -4,33 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PopQuiz</title>
+    <title>Java PopQuiz</title>
     <link rel="stylesheet" href="./assets/css/style.css"/>
 </head>
 <body>
+    <header>
+        <nav>
+            <a>View Highscores</a>
+        </nav>
+    </header>
+    <main>
+        <section id="first" class="quiz-rules">
+            <h1>JavaScript PopQuiz</h1>
+            <p>Test your JavaScript knowledge with this quiz challenge! 
+            </p>
+            <p>
+              You have <strong>60 seconds</strong> to answer <strong>5 questions</strong>. 
+              Each time you get an answer wrong, <strong>10 seconds</strong> gets deducted from your time.
+            </p>
+            <p>
+              Your final score is the amount of time you have left. If the timer hits zero, that's an automatic game over.
+            </p>
+        <button id="start_bttn">Begin Quiz</button>
+        </section>
 
 
-
-
-
-    <section class="container">
-        <h2 id="high_scores"></h2>
-        <!--<h2 id="View High Scores"></h2>-->
-        <h1 class="Welcome">Coding Quiz Challenge</h1>
-        <!--countdown-->
-        <h2 id="countdown">Time: <span id="time-left">0</span></h2>
-    </div>
+    <section id="quiz-questions" class="hidden quiz-box">
+        <p id="timer">Time: <span id="time-left">0</span></p>
+        <h1 id="question">Question</h1>
+        <ul id="selections"></div>
     </section>
 
-    <div class="start_bttn"><button>Start Quiz</button></div>
-    
-    <section id="quiz-questions" class="quiz-box">
-        <h2 id="question">Question</h2>
-        <div id="selections"></div>
-    </section>
-
-
-    <section id="results" class="quiz-box">
+    <section id="results" class="quiz-box hidden">
         <h2 id ="results-title">You have completed the quiz!</h2>
         <p id="final score">You scored: <span id="score">0</span></p>
         <form id="high-score">
@@ -43,13 +48,11 @@
             <button class="quit_bttn">Finished</button>
         </div>
 
-        <div>
+        <!-- <div>
             <p id="correct" class="choice-status hidden"><i class="fas fa-check-circle" aria-hidden="true"></i>Correct!</p>
             <p id="wrong" class="choice-status hidden"><i class="fas fa-times-circle" aria-hidden="true"></i>Wrong!</p>
-          </div>
-    
-
-
-    <script src="./assets/js/script.js"></script>
+          </div> -->
+        </main>
+        <script src="./assets/js/script.js"></script>
 </body>
 </html>
