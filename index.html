@@ -9,7 +9,10 @@
 </head>
 <body>
 
-<div class="start_bttn"><button>Start Quiz</button></div>
+
+
+
+
     <section class="container">
         <h2 id="high_scores"></h2>
         <!--<h2 id="View High Scores"></h2>-->
@@ -17,29 +20,34 @@
         <!--countdown-->
         <h2 id="countdown"></h2>
     </div>
-    
-    
-        <!--Box for questions-->
-        <div class="question_text">
-            <!--Questions will be inserted here-->
-        </div>
-        <!--Box for answer options-->
-        <div class="selection_text">
-            <!--Selections will be inserted here-->
-        </div>
     </section>
 
-    <section class="results">
-        <h2>You have completed the quiz!</h2>
-        <div class="final-score">
-            <!--Results will be inserted here-->
-        </div>
+    <div class="start_bttn"><button>Start Quiz</button></div>
+    
+    <section id="quiz" class="quiz-box">
+        <h2 id="question">Question</h2>
+        <div id="selections"></div>
+    </section>
+
+
+    <section id="results" class="quiz-over">
+        <h2 id ="results-title">You have completed the quiz!</h2>
+        <p id="final score">You scored: <span id="score">0</span></p>
+        <form id="high-score">
+            <label for="initials">Enter initials:</label>
+            <input type="text" id="initials">
+            <button type="enter">Enter</button>
+        </form>
         <div class="buttons">
-            <button class="restart">Play Again</button>
-            <button class="quit">Finished</button>
+            <button class="restart_bttn">Play Again</button>
+            <button class="quit_bttn">Finished</button>
         </div>
-    </section>
 
+        <div>
+            <p id="correct" class="choice-status hidden"><i class="fas fa-check-circle" aria-hidden="true"></i>Correct!</p>
+            <p id="wrong" class="choice-status hidden"><i class="fas fa-times-circle" aria-hidden="true"></i>Wrong!</p>
+          </div>
+    
 
 
     <script src="./assets/js/script.js"></script>
