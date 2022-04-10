@@ -3,20 +3,20 @@ const QUIZ_BOXES = document.querySelectorAll('.quiz-box');
 const START_SECTION = document.getElementById("start");
 const START_BTTN = document.getElementById("start_bttn");
 
-var QUIZ_BOX = document.getElementById("quiz-questions");
-var TIME_LEFT = document.getElementById("time-left");
-var QUESTION = document.getElementById("question");
-var SELECTIONS = document.getElementById("selections");
-var SELECTIONS_STATUS = document.querySelectorAll(".selection-status")
-// var RIGHT = document.getElementById("correct");
-// var WRONG = document.getElementById("incorrect");
+const QUIZ_BOX = document.getElementById("quiz-questions");
+const TIME_LEFT = document.getElementById("time-left");
+const QUESTION = document.getElementById("question");
+const SELECTIONS = document.getElementById("selections");
+const SELECTIONS_STATUS = document.querySelectorAll(".selection-status")
+const RIGHT = document.getElementById("correct");
+const WRONG = document.getElementById("incorrect");
 
-var RESULTS_SECTION = document.getElementById("results");
-var RESULTS_TITLE = document.getElementById("results-title");
-var SCORE = document.getElementById("score");
-var INITIALS_ENTERED = document.getElementById("initials");
-var ENTER_SCORE = document.getElementById("high-score");
-var ERROR_MESSAGE = document.getElementById("error-message");
+const RESULTS_SECTION = document.getElementById("results");
+const RESULTS_TITLE = document.getElementById("results-title");
+const SCORE = document.getElementById("score");
+const INITIALS_ENTERED = document.getElementById("initials");
+const ENTER_SCORE = document.getElementById("high-score");
+const ERROR_MESSAGE = document.getElementById("error-message");
 
 class Question {
     constructor(question, selections, indexOfCorrectSelections) {
@@ -27,23 +27,23 @@ class Question {
     }
 }
 
-var QUESTION1 = new Question("Commonly used data types do NOT include: ",
-["Strings", "Booleans", "Alerts", "Numbers"], 2);
-var QUESTION2 = new Question("The condition in an if/else statement is enclosed within ______.",
-["Quotes", "Curly brackets", "Parantheses", "Square brakets"], 2);
-var QUESTION3 = new Question("Arrays in Javascript can be used to store ______.",
-["Numbers and Strings", "Other arrays", "Booleans", "All of the above"], 3);
-var QUESTION4 = new Question("String values must be enclosed within _______ when being assigned to variables.",
-["Commas", "Curly Brackets", "Quotes", "Parentheses"], 2);
-var QUESTION5 = new Question("A very useful tool used during development and debugging for printing content to the debugger is: ",
-["Javascript", "Terminal/Bash", "For Loops", "console.log"], 3);
-var QUESTION_OPTIONS = [QUESTION1, QUESTION2, QUESTION3, QUESTION4, QUESTION5];
+const QUESTION_1 = new Question("Commonly used data types DO NOT include: ", 
+  ["Strings", "Booleans", "Alerts", "Numbers"], 2);
+const QUESTION_2 = new Question("The condition in an if / else statement is enclosed within ____.", 
+  ["Quotes", "Curly brackets", "Parentheses", "Square brackets"], 2);
+const QUESTION_3 = new Question("Arrays in JavaScript can be used to store ____.", 
+  ["Numbers and Strings", "Other arrays", "Booleans", "All of the above"], 3);
+const QUESTION_4 = new Question("String values must be enclosed within _____ when being assigned to variables.", 
+  ["Commas", "Curly brackets", "Quotes", "Parentheses"], 2);
+const QUESTION_5 = new Question("A very useful tool used during development and debugging for printing content to the debugger is: ", 
+  ["JavaScript", "Terminal/Bash", "For Loops", "console.log"], 3);
+const QUESTION_OPTIONS = [QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_4, QUESTION_5];
 
-var startQuestion = 0;
+let startQuestion = 0;
 
-var maxTime = 60;
-var maxTimeInterval;
-var selectionOptionExpire;
+let maxTime = 60;
+let maxTimeInterval;
+let selectionOptionExpire;
 
     /*Event Listeners */
     START_BTTN.addEventListener('click', beginGame);
@@ -54,7 +54,7 @@ var selectionOptionExpire;
 function beginGame() {
     showElement(QUIZ_BOXES, QUIZ_BOX);
     countDown();
-    showQuestions();
+    showQuestion();
     beginCountdown();
 }
 
@@ -85,14 +85,14 @@ function beginCountdown() {
 }
 
 function endTime() {
-    if (maxTime = 0) {
-        endGame();
+    if (maxTime <= 0) {
+        maxTime = 0;
+        finishGame();
     }
 }
 
-function showQuestions() {
-    Question.textContent = QUESTION_OPTIONS[startQuestion].question;
-
+function showQuestion() {
+    QUESTION.textContent = QUESTION_OPTIONS[startQuestion].question;
     showSelectionList();
 }
 
@@ -130,7 +130,7 @@ function correctAnswer(selection) {
 }
 
 function showCorrectAnswer() {
-    showElement(SELECTIONS_STATUS);
+    showElement(SELECTIONS_STATUS, RIGHT);
 }
 
 function showWrongAnswer() {
@@ -150,7 +150,7 @@ function goToNextQuestion() {
     if (startQuestion >= QUESTION_OPTIONS.length) {
         finishGame();
     }else {
-        showQuestions();
+        showQuestion();
     }
     
 }
@@ -169,7 +169,7 @@ function showScore() {
 
 function scoreResult() {
     if (maxTime === 0) {
-        RESULTS_TITLE = "You ran out of time!";
+        RESULTS_TITLE.textContent = "You ran out of time!";
     } else {
         RESULTS_TITLE.textContent = "Yay, you were able to complete the quiz in time!";
     }

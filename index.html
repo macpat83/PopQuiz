@@ -14,17 +14,18 @@
         </nav>
     </header>
     <main>
-        <section id="first" class="quiz-rules">
+        <section id="first" class="quiz-box">
             <h1>JavaScript PopQuiz</h1>
-            <p>Test your JavaScript knowledge with this quiz challenge! 
+            <p>Welcome to the JavaScript PopQuiz
             </p>
             <p>
-              You have <strong>60 seconds</strong> to answer <strong>5 questions</strong>. 
-              Each time you get an answer wrong, <strong>10 seconds</strong> gets deducted from your time.
+              You have 60 seconds to complete the quiz.
+              But be very careful because for every wrong answer you will lose 10 seconds.
             </p>
             <p>
-              Your final score is the amount of time you have left. If the timer hits zero, that's an automatic game over.
+              Your final score will be how much time is left remaining. If you do not finish in time you will score a 0. 
             </p>
+            <p>Good Luck!</p>
         <button id="start_bttn">Begin Quiz</button>
         </section>
 
@@ -48,10 +49,11 @@
             <button class="quit_bttn">Finished</button>
         </div>
 
-        <!-- <div>
-            <p id="correct" class="choice-status hidden"><i class="fas fa-check-circle" aria-hidden="true"></i>Correct!</p>
-            <p id="wrong" class="choice-status hidden"><i class="fas fa-times-circle" aria-hidden="true"></i>Wrong!</p>
-          </div> -->
+        <div>
+            <p id="correct" class="selection-status hidden"><i class="fas fa-check-circle" aria-hidden="true"></i>Correct!</p>
+            <p id="incorrect" class="selection-status hidden"><i class="fas fa-times-circle" aria-hidden="true"></i>Wrong!</p>
+          </div>
+          
         </main>
         <script src="./assets/js/script.js"></script>
 </body>
