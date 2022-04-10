@@ -27,16 +27,16 @@ class Question {
     }
 }
 
-const QUESTION_1 = new Question("Commonly used data types DO NOT include: ", 
-  ["Strings", "Booleans", "Alerts", "Numbers"], 2);
-const QUESTION_2 = new Question("The condition in an if / else statement is enclosed within ____.", 
-  ["Quotes", "Curly brackets", "Parentheses", "Square brackets"], 2);
-const QUESTION_3 = new Question("Arrays in JavaScript can be used to store ____.", 
-  ["Numbers and Strings", "Other arrays", "Booleans", "All of the above"], 3);
-const QUESTION_4 = new Question("String values must be enclosed within _____ when being assigned to variables.", 
-  ["Commas", "Curly brackets", "Quotes", "Parentheses"], 2);
-const QUESTION_5 = new Question("A very useful tool used during development and debugging for printing content to the debugger is: ", 
-  ["JavaScript", "Terminal/Bash", "For Loops", "console.log"], 3);
+const QUESTION_1 = new Question("Which country does Forrest Gump travel to as part of the All-American Ping-Pong Team? ", 
+  ["Vietnam", "Sweden", "China", "France"], 2);
+const QUESTION_2 = new Question("Who directed the hit 2017 movie Get Out?", 
+  ["James Wan", "Jordan Peele", "Guillermo del Toro", "Tim Story"], 1);
+const QUESTION_3 = new Question("What item is in every Fight Club scene?", 
+  ["A Coca-Cola can", "A Dunkin' donut", "A Pepsi bottle", "A Starbucks cup"], 3);
+const QUESTION_4 = new Question("If you watch the Marvel movies in chronological order, which movie would you watch first?", 
+  ["Iron Man", "Doctor Stange", "Captain America: The First Avenger", "Captain Marvel"], 2);
+const QUESTION_5 = new Question("Which is the first movie in the Bourne franchise?", 
+  ["The Bourne Identity", "The Bourne Legacy", "The Bourne Supremacy", "Jason Bourne"], 0);
 const QUESTION_OPTIONS = [QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_4, QUESTION_5];
 
 let startQuestion = 0;
@@ -131,10 +131,17 @@ function correctAnswer(selection) {
 
 function showCorrectAnswer() {
     showElement(SELECTIONS_STATUS, RIGHT);
+    selectionStatusTimeout = setTimeout(function() {
+        hideElement(RIGHT);
+    }, 1000);
 }
 
 function showWrongAnswer() {
     timePenalty(10);
+    showElement(SELECTIONS_STATUS, WRONG)
+    selectionStatusTimeout = setTimeout(function() {
+        hideElement(WRONG);
+    }, 1000);
 
 
 }
@@ -176,8 +183,9 @@ function scoreResult() {
 }
 
 function inputScore(event) {
+    event.preventDefault();
     
-    var initials = INITIALS_ENTERED.ariaValueMax.toUpperCase();
+    var initials = INITIALS_ENTERED.ariaValueMax
 
     if (initials) {
         var score = maxTime;
@@ -194,6 +202,8 @@ function newHighScore(initials, score) {
     return input;
     }
 
+    
+
 
     function saveHighScore(highscore) {
         var scores = leaderBoard();
@@ -209,4 +219,21 @@ function newHighScore(initials, score) {
         }else {
             return [];
         }
+    }
+
+    function addHighScore(newScore, Leaderboard) {
+        const newHighScoreIndex = getNewHighScoreIndex(newScore, Leaderboard);
+        Leaderboard.splice(newHighScore, 0, newScore);
+    }
+
+    function getNewHighScoreIndex(newScore, LeaderBoard) {
+        if (LeaderBoard.length > 0) {
+            for (let i = 0; i < LeaderBoard.length; i++) {
+                if (LeaderBoard[i].score <= newScore.score) {
+                    return i;
+                }
+            }
+        }
+
+        return LeaderBoard.length;
     }

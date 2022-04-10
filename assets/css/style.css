@@ -1,10 +1,3 @@
-/*Colors 
-Red: #E81648;
-Light Gray: #CECECE;
-Black: #202020;
-Purple: #4616E8;
-Dark purple: #27126F;
-*/
 
 /*****Body*****/
 html {
@@ -13,11 +6,10 @@ html {
   
   body {
     /*System fonts*/
-    font-family: -apple-system, BlinkMacSystemFont,
-      “Segoe UI”, “Roboto”, “Oxygen”, “Ubuntu”, “Cantarell”,
-      “Fira Sans”, “Droid Sans”, “Helvetica Neue”,
-      sans-serif;
-    color: #202020;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #eb7e7e;
+    background-image: url("../images/wp6608509-movie-theater-wallpapers.jpg");
+    background-size: cover;
     
     box-sizing: border-box;
     margin: 0; 
@@ -41,7 +33,7 @@ html {
   
   /*Clickable*/
   a {
-    color: #4616E8;
+    color: #a40000;
     text-decoration: none;
   
     transition: color 0.2s ease-in-out;
@@ -50,11 +42,11 @@ html {
   a:hover, 
   a:focus, 
   a:active {
-    color: #27126F;
+    color: #ff0000;
   }
   
   button,
-  .back-button {
+  .restart-button {
     display: inline-block;
     padding: 5px 15px;
     margin: 0.5em 0.5em 0 0.5em;
@@ -62,7 +54,7 @@ html {
     border-radius: 4px;
     border-style: none;
   
-    background-color: #4616E8;
+    background-color: #a40000;
   
     color: white;
     cursor: pointer;
@@ -72,17 +64,17 @@ html {
     transition: background-color 0.2s ease-in-out;
   }
   
-  .back-button:hover, 
-  .back-button:focus, 
-  .back-button:active,
+  .restart-button:hover, 
+  .restart-button:focus, 
+  .restart-button:active,
   button:hover, 
   button:focus, 
   button:active{
-    background-color: #27126F;
+    background-color: #ff0000;
     color: white;
   }
   
-  .back-button {
+  .restart-button {
     margin-left: 0;
   }
   
@@ -112,6 +104,10 @@ html {
   /*****Start*****/
   #first {
     text-align: center;
+    color: #eb7e7e;
+    font-size: 24px;
+    
+    
   }
   
   /*****Quiz-questions*****/
@@ -133,7 +129,7 @@ html {
   }
   
   #time-left{
-    color: #4616E8;
+    color: #eb7e7e;
   }
   
   #selections {
@@ -151,11 +147,11 @@ html {
   }
   
   #correct {
-   color:  #4616E8;
+   color:  #ffffff;
   }
   
   #incorrect {
-    color: #E81648;
+    color: #ffffff;
   }
   
   /*gray line before choice status*/
@@ -172,7 +168,7 @@ html {
   
   #score {
     font-weight: bold;
-    color: #4616E8;
+    color: #ffffff;
   }
   
   /*form*/
@@ -192,49 +188,6 @@ html {
     box-sizing: border-box;
   }
   
-  .error {
-    border: 1.5px solid red;
-  }
-  
-  #error-message {
-    color: red;
-    margin-top: 5px;
-  }
-  
-  /*****Highscores*****/
-  table {
-    border-spacing: 0 0.5em;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #EBEBEB;
-  }
-  
-  td, th {
-    padding: 10px;
-  }
-  
-  th {
-    border-bottom: 1px solid #CECECE;
-  }
-  
-  td {
-    text-align: center;
-  }
-  
-  th:first-child,
-  td:first-child {
-    text-align: left;
-  }
-  
-  th:last-child,
-  td:last-child  {
-    text-align: right;
-  }
-  
-  #highscore-buttons {
-    margin-bottom: 50px;
-  }
   
   /*****Breakpoints*****/
   @media only screen and (min-width: 992px) {
