@@ -2,6 +2,7 @@ const QUIZ_BOXES = document.querySelectorAll('.quiz-box');
 
 const START_SECTION = document.getElementById("start");
 const START_BTTN = document.getElementById("start_bttn");
+const HIGHSCORE_BTTN = document.getElementById("highscore_bttn");
 
 const QUIZ_BOX = document.getElementById("quiz-questions");
 const TIME_LEFT = document.getElementById("time-left");
@@ -10,6 +11,9 @@ const SELECTIONS = document.getElementById("selections");
 const SELECTIONS_STATUS = document.querySelectorAll(".selection-status")
 const RIGHT = document.getElementById("correct");
 const WRONG = document.getElementById("incorrect");
+const INITIALS = document.getElementById("initials");
+const HIGHSCORE = document.getElementById("score");
+const HIGHSCORE_INPUT = document.getElementById("highscore_input");
 
 const RESULTS_SECTION = document.getElementById("results");
 const RESULTS_TITLE = document.getElementById("results-title");
@@ -17,6 +21,7 @@ const SCORE = document.getElementById("score");
 const INITIALS_ENTERED = document.getElementById("initials");
 const ENTER_SCORE = document.getElementById("high-score");
 const ERROR_MESSAGE = document.getElementById("error-message");
+const HIGH_SCORE= document.getElementById("highscore")
 
 class Question {
     constructor(question, selections, indexOfCorrectSelections) {
@@ -49,6 +54,7 @@ let selectionOptionExpire;
     START_BTTN.addEventListener('click', beginGame);
     SELECTIONS.addEventListener('click', assessSelection);
     ENTER_SCORE.addEventListener('submit', inputScore);
+    HIGHSCORE_BTTN.addEventListener('click', viewHighScore);
 
 
 function beginGame() {
@@ -184,56 +190,28 @@ function scoreResult() {
 
 function inputScore(event) {
     event.preventDefault();
+    console.log("clicked")
     
-    var initials = INITIALS_ENTERED.ariaValueMax
+    var initials = INITIALS_ENTERED.value
+    console.log(initials);
 
     if (initials) {
         var score = maxTime;
-        var highscore = newHighScore(initials, score);
-        saveHighScore(highscore);
+
+        var highscore = {initials, score}
+        localStorage.setItem("leaderboard", JSON.stringify(highscore)) 
+        
     }
 }
 
-function newHighScore(initials, score) {
-    var input = {
-        initials: initials,
-        score: score,
-    }
-    return input;
-    }
+function viewHighScore(){
+    showElement(QUIZ_BOXES, HIGH_SCORE);
+    var highscore = JSON.parse(localStorage.getItem("leaderboard"));
+    console.log(highscore);
+    var initials = highscore.initials;
+    var score = highscore.score;
+    HIGHSCORE_INPUT.textContent = initials + " " + score;
+   
 
-    
+}
 
-
-    function saveHighScore(highscore) {
-        var scores = leaderBoard();
-        addHighScore(highscore, scores);
-        localStorage.setItem('LeaderBoard', JSON.stringify(scores));
-        
-    }
-
-    function leaderBoard() {
-        var scores = localStorage.getItem('LeaderBoard')
-        if (scores) {
-            return JSON.parse(scores);
-        }else {
-            return [];
-        }
-    }
-
-    function addHighScore(newScore, Leaderboard) {
-        const newHighScoreIndex = getNewHighScoreIndex(newScore, Leaderboard);
-        Leaderboard.splice(newHighScore, 0, newScore);
-    }
-
-    function getNewHighScoreIndex(newScore, LeaderBoard) {
-        if (LeaderBoard.length > 0) {
-            for (let i = 0; i < LeaderBoard.length; i++) {
-                if (LeaderBoard[i].score <= newScore.score) {
-                    return i;
-                }
-            }
-        }
-
-        return LeaderBoard.length;
-    }

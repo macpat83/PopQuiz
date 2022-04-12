@@ -10,7 +10,7 @@
 <body>
     <header>
         <nav>
-            <a>View Highscores</a>
+            <a id="highscore_bttn">View Highscores</a>
         </nav>
     </header>
     <main>
@@ -45,6 +45,7 @@
             <button type="submit">Enter</button>
         </form>
 
+
         <a href="index.html" class="restart-button"><i class="fas fa-angle-left" aria-hidden="true"></i>Restart Quiz</a>
       </section>
         
@@ -53,6 +54,13 @@
             <p id="correct" class="selection-status hidden"><i class="fas fa-check-circle" aria-hidden="true"></i>Correct!</p>
             <p id="incorrect" class="selection-status hidden"><i class="fas fa-times-circle" aria-hidden="true"></i>Incorrect!</p>
           </div>
+
+          <section id="highscore" class="hidden quiz-box">
+              <h2 id="High Score">High Score</h2>
+              <p id="highscore_input">Initials<span id="initials"></span>
+                <span id="score"></span>
+                </p>
+                </section>
 
         </main>
         <script src="./assets/js/script.js"></script>
