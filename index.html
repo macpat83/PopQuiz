@@ -9,11 +9,13 @@
 </head>
 <body>
     <header>
+        <!--High scores button-->
         <nav>
             <a id="highscore_bttn">View Highscores</a>
         </nav>
     </header>
     <main>
+        <!--Quiz Instructions-->
         <section id="first" class="quiz-box">
             <h1>Movie PopQuiz</h1>
             <p>Welcome!!!
@@ -29,13 +31,14 @@
         <button id="start_bttn">Begin Quiz</button>
         </section>
 
-
+        <!--Quiz Box for questions and answers-->
     <section id="quiz-questions" class="hidden quiz-box">
         <p id="timer">Time: <span id="time-left">0</span></p>
         <h1 id="question">Question</h1>
         <ul id="selections"></div>
     </section>
 
+    <!--Box for results after quiz finished-->
     <section id="results" class="quiz-box hidden">
         <h2 id ="results-title">You have completed the quiz!</h2>
         <p id="final score">You scored: <span id="score">0</span></p>
@@ -45,16 +48,17 @@
             <button type="submit">Enter</button>
         </form>
 
-
+            <!--Restart Button-->
         <a href="index.html" class="restart-button"><i class="fas fa-angle-left" aria-hidden="true"></i>Restart Quiz</a>
       </section>
         
-
+            <!--Right/Wrong pop up for answer choices-->
         <div>
             <p id="correct" class="selection-status hidden"><i class="fas fa-check-circle" aria-hidden="true"></i>Correct!</p>
             <p id="incorrect" class="selection-status hidden"><i class="fas fa-times-circle" aria-hidden="true"></i>Incorrect!</p>
           </div>
 
+          <!--High scores html-->
           <section id="highscore" class="hidden quiz-box">
               <h2 id="High Score">High Score</h2>
               <p id="highscore_input">Initials<span id="initials"></span>

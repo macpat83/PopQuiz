@@ -1,3 +1,4 @@
+
 const QUIZ_BOXES = document.querySelectorAll('.quiz-box');
 
 const START_SECTION = document.getElementById("start");
@@ -23,6 +24,7 @@ const ENTER_SCORE = document.getElementById("high-score");
 const ERROR_MESSAGE = document.getElementById("error-message");
 const HIGH_SCORE= document.getElementById("highscore")
 
+//constructpr for questions
 class Question {
     constructor(question, selections, indexOfCorrectSelections) {
         this.question = question;
@@ -31,7 +33,7 @@ class Question {
 
     }
 }
-
+//Question objects
 const QUESTION_1 = new Question("Which country does Forrest Gump travel to as part of the All-American Ping-Pong Team? ", 
   ["Vietnam", "Sweden", "China", "France"], 2);
 const QUESTION_2 = new Question("Who directed the hit 2017 movie Get Out?", 
@@ -56,7 +58,7 @@ let selectionOptionExpire;
     ENTER_SCORE.addEventListener('submit', inputScore);
     HIGHSCORE_BTTN.addEventListener('click', viewHighScore);
 
-
+//function to start game
 function beginGame() {
     showElement(QUIZ_BOXES, QUIZ_BOX);
     countDown();
@@ -64,6 +66,7 @@ function beginGame() {
     beginCountdown();
 }
 
+//function to show and hide elements
 function showElement(siblingList, showElement) {
     for (element of siblingList) {
       hideElement(element);
@@ -77,10 +80,12 @@ function showElement(siblingList, showElement) {
     }
   }
 
+//function for countdown
 function countDown() {
     TIME_LEFT.textContent = maxTime;
 }
 
+//function to begin countdown
 function beginCountdown() {
     maxTimeInterval = setInterval(function() {
         maxTime--;
@@ -90,6 +95,7 @@ function beginCountdown() {
     }, 1000);
 }
 
+//function to capture time remaining
 function endTime() {
     if (maxTime <= 0) {
         maxTime = 0;
@@ -97,11 +103,13 @@ function endTime() {
     }
 }
 
+//function to show question
 function showQuestion() {
     QUESTION.textContent = QUESTION_OPTIONS[startQuestion].question;
     showSelectionList();
 }
 
+//function to show answer choices
 function showSelectionList() {
     SELECTIONS.innerHTML = "";
 
@@ -116,6 +124,7 @@ function showSelectionList() {
 }
 
 
+//function to get users answer choice
 function assessSelection(event) {
     var userSelection = parseInt(event.target.parentElement.dataset.index);
 
@@ -123,6 +132,7 @@ function assessSelection(event) {
     goToNextQuestion();
 }
 
+//function to verify if answer choice is correct
 function verifySelection(userSelection) {
     if (correctAnswer(userSelection)) {
         showCorrectAnswer();
@@ -131,10 +141,12 @@ function verifySelection(userSelection) {
     }
 }
 
+//function to capture correct answer
 function correctAnswer(selection) {
     return selection === QUESTION_OPTIONS[startQuestion].indexOfCorrectSelections;
 }
 
+//function to show correct response
 function showCorrectAnswer() {
     showElement(SELECTIONS_STATUS, RIGHT);
     selectionStatusTimeout = setTimeout(function() {
@@ -142,6 +154,7 @@ function showCorrectAnswer() {
     }, 1000);
 }
 
+//function to show incorrect response
 function showWrongAnswer() {
     timePenalty(10);
     showElement(SELECTIONS_STATUS, WRONG)
@@ -152,12 +165,14 @@ function showWrongAnswer() {
 
 }
 
+//function for the incorrect time 
 function timePenalty(seconds) {
     maxTime -= seconds;
     endTime();
     countDown();
 }
 
+//function to get the next question
 function goToNextQuestion() {
     startQuestion++;
     if (startQuestion >= QUESTION_OPTIONS.length) {
@@ -168,6 +183,7 @@ function goToNextQuestion() {
     
 }
 
+//function to finish the game
 function finishGame() {
     clearInterval(maxTimeInterval);
     showElement(QUIZ_BOXES, RESULTS_SECTION)
@@ -176,10 +192,12 @@ function finishGame() {
 
 }
 
+//function to showscore
 function showScore() {
     SCORE.textContent = maxTime;
 }
 
+//function to get scoreResult
 function scoreResult() {
     if (maxTime === 0) {
         RESULTS_TITLE.textContent = "You ran out of time!";
@@ -188,12 +206,13 @@ function scoreResult() {
     }
 }
 
+//function to enter score into local storage
 function inputScore(event) {
     event.preventDefault();
-    console.log("clicked")
+    
     
     var initials = INITIALS_ENTERED.value
-    console.log(initials);
+    
 
     if (initials) {
         var score = maxTime;
@@ -204,10 +223,10 @@ function inputScore(event) {
     }
 }
 
+//function to get scores out of local storage and display
 function viewHighScore(){
     showElement(QUIZ_BOXES, HIGH_SCORE);
     var highscore = JSON.parse(localStorage.getItem("leaderboard"));
-    console.log(highscore);
     var initials = highscore.initials;
     var score = highscore.score;
     HIGHSCORE_INPUT.textContent = initials + " " + score;
